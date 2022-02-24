@@ -7,11 +7,10 @@ jobs:
     name: Set assignees
     runs-on: ubuntu-latest
     steps:
-      - name: Set assignees
       - uses: octokit/request-action@v2.x
-        id: repository
+        id: repo
         with:
           route: GET /repos/${{ github.repository }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # or ${{ github.token }}
-      - run: echo ${{ fromJson(steps.repository.outputs.data).default_branch }}
+      - run: echo ${{ fromJson(steps.repo.outputs.data).default_branch }}
